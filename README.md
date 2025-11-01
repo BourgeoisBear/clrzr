@@ -41,8 +41,7 @@ Rebuild helptags with `helptags ALL`, then see `:help clrzr` for more options.
 
 *NOTE:* `clrzr` requires a copy of `awk`, callable from your system path.
 This is used to speed up pattern extraction.  Almost any version will do.
-On Unix/Linux/Mac, it is probably already intstalled.  `gawk` and `goawk`
-also seem to work.  `mawk` does not.  Figuring this out is on the list.
+On Unix/Linux/Mac, it is probably already intstalled.
 
 ### True-Color Support
 

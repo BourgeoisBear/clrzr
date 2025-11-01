@@ -582,9 +582,17 @@ function! clrzr#Enable()
     let job_opts['noblock'] = 1
   endif
 
-  let s:awk_job = job_start(
-        \ ['awk', '-f', s:CLRZR_AWK_SCRIPT_PATH],
-        \ job_opts)
+	let l:awk_cmd = ['awk']
+	if executable('gawk')
+		let l:awk_cmd = ['gawk', '--posix']
+	elseif executable('mawk')
+		let l:awk_cmd = ['mawk', '--posix', '-W', 'interactive']
+	elseif executable('goawk')
+		let l:awk_cmd = ['goawk']
+	endif
+	call extend(l:awk_cmd, ['-f', s:CLRZR_AWK_SCRIPT_PATH])
+
+  let s:awk_job = job_start(l:awk_cmd, job_opts)
 
   " NOTE: string(chan) == 'channel fail' is error
   let s:awk_chan = job_getchannel(s:awk_job)
