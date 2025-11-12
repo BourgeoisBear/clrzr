@@ -67,6 +67,17 @@ you are not seeing the colors, add the following lines to your `vimrc` and resta
 Sometimes, `cursorline` obscures the highlights added by `clrzr`.  Disable it to see
 colors as you type them.  Very useful in combination with `CTRL-A` and `CTRL-X` (increment & decrement)!
 
+### Compatibility Escape Hatch
+
+Some languages don't make common use of color codes but have constructs that could appear to be color codes.
+Notably the C and C++ preprocessor `#define` can have the `#def` prefix interpreted as a hex color. To exempt
+a file from clrzr highlighting you can set a buffer local variable.
+
+```vim
+   " probably best in .vim/ftplugin/<filetype>.vim
+   let b:clrzr_exempt = v:true
+```
+
 ### Origin
 
 This version is based on https://github.com/lilydjwg/colorizer, also found as
