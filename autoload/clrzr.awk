@@ -11,11 +11,11 @@ BEGIN {
 	cma = rSpc "," rSpc
 
 	rExpr = "(" \
-		"(0x|#)(" rHex "{8}|" rHex "{6}|" rHex "{4}|" rHex "{3})" \
+		"(\\<0x|#)(" rHex "{8}|" rHex "{6}|" rHex "{4}|" rHex "{3})\\>" \
 		"|" \
-		"(rgb|rgba)\\(" rSpc rFltOrPct cma rFltOrPct cma rFltOrPct "(" cma rFltOrPct ")?" rSpc "\\)" \
+		"(\\<rgb|\\<rgba)\\(" rSpc rFltOrPct cma rFltOrPct cma rFltOrPct "(" cma rFltOrPct ")?" rSpc "\\)" \
 		"|" \
-		"(hsl|hsla)\\(" rSpc rFlt cma rPct cma rPct "(" cma rFltOrPct ")?" rSpc "\\)" \
+		"(\\<hsl|\\<hsla)\\(" rSpc rFlt cma rPct cma rPct "(" cma rFltOrPct ")?" rSpc "\\)" \
 	")"
 
 	rNumPfx = "^" rSpc "[0-9]+\t"
