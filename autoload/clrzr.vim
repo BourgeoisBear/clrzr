@@ -19,7 +19,6 @@ set cpo&vim
 " - multi-line insert (check textprop count)
 " - awk vs unicode.  (line2byte, byte2line?)
 " - change colors, or enable/disable, with two views into same buffer to reproduce E966
-" TODO: allowed filetypes list?
 " TODO: sign_column (bigger pls, :h sign-commands)?
 " TODO: color change operation
 
@@ -519,14 +518,18 @@ endfunction
 function! clrzr#RefreshAllBuffers()
   let bufs = getbufinfo()
   for d_buf in bufs
-    call s:RebuildTextProps(d_buf, 1, d_buf.linecount)
+    if !get(d_buf.variables, "clrzr_exempt", v:false)
+      call s:RebuildTextProps(d_buf, 1, d_buf.linecount)
+    endif
   endfor
 endfunction
 
 
 function! clrzr#Refresh()
   let [d_buf] = getbufinfo(bufnr())
-  call s:RebuildTextProps(d_buf, 1, d_buf.linecount)
+  if !get(d_buf.variables, "clrzr_exempt", v:false)
+    call s:RebuildTextProps(d_buf, 1, d_buf.linecount)
+  endif
 endfunction
 
 
